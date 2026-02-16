@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
@@ -39,9 +41,18 @@ class MainActivity : ComponentActivity() {
             TheGreatestCocktailAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     GradientBackground() {
-                        Column(Modifier.fillMaxSize().padding(innerPadding), horizontalAlignment = Alignment.CenterHorizontally) {
+                        Column(
+                            Modifier
+                                .fillMaxSize()
+                                .padding(innerPadding),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
                             CocktailImage()
                             CocktailName()
+                            Row() {
+                                InfoTextBox("Other/Unknown")
+                                InfoTextBox("Non-alcoholic")
+                            }
                         }
                     }
                 }
@@ -60,8 +71,8 @@ fun GradientBackground(
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        colorResource(R.color.teal_700),
-                        colorResource(R.color.purple_700)
+                        colorResource(R.color.orange),
+                        colorResource(R.color.teal)
                     )
                 )
             )
@@ -82,8 +93,8 @@ fun CocktailImage() {
             .height(200.dp)
             .clip(CircleShape)
             .border(
-                width = 1.dp,
-                color = Color(200, 100, 200),
+                width = 2.dp,
+                color = colorResource(R.color.red),
                 shape = CircleShape,
             )
     )
@@ -92,9 +103,38 @@ fun CocktailImage() {
 @Composable
 fun CocktailName() {
     Text(
-        text = "Cocktail Something",
+        text = "✨Cocktail Fancy✨",
         fontSize = 36.sp,
-        color = Color.White,
+        fontFamily = FontFamily.Cursive,
+        color = colorResource(R.color.white),
         modifier = Modifier.padding(top = 16.dp)
     )
+}
+
+@Composable
+fun InfoTextBox(textToDisplay: String) {
+    Box(
+        Modifier
+            .padding(16.dp)
+            .clip(CircleShape)
+            .background(
+                brush = Brush.horizontalGradient(
+                    listOf(
+                        colorResource(
+                            R.color.red
+                        ),
+                        colorResource(
+                            R.color.orange
+                        )
+                    )
+                )
+            )
+    ) {
+        Text(
+            text = textToDisplay,
+            fontSize = 18.sp,
+            color = Color.White,
+            modifier = Modifier.padding(10.dp)
+        )
+    }
 }
