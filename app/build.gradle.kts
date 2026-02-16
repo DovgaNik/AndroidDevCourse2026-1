@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "dev.dovhan.thegreatestcocktailapp"
-        minSdk = 36
+        minSdk = 28
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
