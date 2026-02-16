@@ -4,17 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,9 +30,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.dovhan.thegreatestcocktailapp.ui.theme.TheGreatestCocktailAppTheme
@@ -53,6 +58,9 @@ class MainActivity : ComponentActivity() {
                                 InfoTextBox("Other/Unknown")
                                 InfoTextBox("Non-alcoholic")
                             }
+                            InfoCard("Tu chie fort")
+                            InfoCard("I need a context")
+                            InfoCard("Putain de merde")
                         }
                     }
                 }
@@ -63,16 +71,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GradientBackground(
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
+    modifier: Modifier = Modifier, content: @Composable () -> Unit
 ) {
     Box(
         modifier
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        colorResource(R.color.orange),
-                        colorResource(R.color.teal)
+                        colorResource(R.color.orange), colorResource(R.color.teal)
                     )
                 )
             )
@@ -89,6 +95,7 @@ fun CocktailImage() {
         contentDescription = "Bon bah, alors",
         contentScale = ContentScale.FillBounds,
         modifier = Modifier
+            .padding(top = 8.dp)
             .width(200.dp)
             .height(200.dp)
             .clip(CircleShape)
@@ -122,8 +129,7 @@ fun InfoTextBox(textToDisplay: String) {
                     listOf(
                         colorResource(
                             R.color.red
-                        ),
-                        colorResource(
+                        ), colorResource(
                             R.color.orange
                         )
                     )
@@ -136,5 +142,19 @@ fun InfoTextBox(textToDisplay: String) {
             color = Color.White,
             modifier = Modifier.padding(10.dp)
         )
+    }
+}
+
+@Composable
+fun InfoCard(textToDisplay: String) {
+    Card(modifier = Modifier.fillMaxWidth().padding(8.dp), border = BorderStroke(2.dp, colorResource(R.color.red))) {
+        Column(modifier = Modifier.padding(4.dp)) {
+            Text(
+                text = textToDisplay,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Text(stringResource(R.string.lorem_ipsum))
+        }
     }
 }
