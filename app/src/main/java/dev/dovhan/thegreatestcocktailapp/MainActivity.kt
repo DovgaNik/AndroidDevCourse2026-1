@@ -4,13 +4,22 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import dev.dovhan.thegreatestcocktailapp.ui.theme.TheGreatestCocktailAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,10 +29,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             TheGreatestCocktailAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    CocktailImage()
                 }
             }
         }
@@ -31,17 +37,19 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
+fun CocktailImage() {
+    Image(
+        painterResource(R.drawable.cocktail),
+        contentDescription = "Bon bah, alors",
+        contentScale = ContentScale.FillBounds,
+        modifier = Modifier
+            .width(200.dp)
+            .height(200.dp)
+            .clip(CircleShape)
+            .border(
+                width = 1.dp,
+                color = Color(200, 100, 200),
+                shape = CircleShape,
+            )
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TheGreatestCocktailAppTheme {
-        Greeting("Android")
-    }
 }
