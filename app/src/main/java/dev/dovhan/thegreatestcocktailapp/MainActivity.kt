@@ -9,6 +9,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -49,7 +51,8 @@ class MainActivity : ComponentActivity() {
                         Column(
                             Modifier
                                 .fillMaxSize()
-                                .padding(innerPadding),
+                                .padding(innerPadding)
+                                .verticalScroll(rememberScrollState()),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             CocktailImage()
@@ -58,9 +61,8 @@ class MainActivity : ComponentActivity() {
                                 InfoTextBox("Other/Unknown")
                                 InfoTextBox("Non-alcoholic")
                             }
-                            InfoCard("Tu chie fort")
-                            InfoCard("I need a context")
-                            InfoCard("Putain de merde")
+                            InfoCard("Ingredients")
+                            InfoCard("Recipe")
                         }
                     }
                 }
