@@ -81,7 +81,7 @@ fun CocktailImage() {
         contentDescription = "Bon bah, alors",
         contentScale = ContentScale.FillBounds,
         modifier = Modifier
-            .padding(top = 8.dp)
+            //.padding(top = 8.dp)
             .width(200.dp)
             .height(200.dp)
             .clip(CircleShape)

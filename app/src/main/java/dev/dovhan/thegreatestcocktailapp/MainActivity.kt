@@ -1,6 +1,7 @@
 package dev.dovhan.thegreatestcocktailapp
 
 import android.os.Bundle
+import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,9 +17,11 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import dev.dovhan.thegreatestcocktailapp.ui.theme.TheGreatestCocktailAppTheme
@@ -32,19 +35,25 @@ class MainActivity : ComponentActivity() {
             val context = LocalContext.current
             TheGreatestCocktailAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
-                    TopAppBar(title = { Text("Cocktail App") }, actions = {
-                        IconButton(
-                            {
-                                makeText(context, "Cocktail added to favs", 3).show()
-                            }) {
-                            Icon(
-                                painter = painterResource(R.drawable.heart_icon),
-                                contentDescription = "Favorite Icon",
-                                tint = Color.Unspecified,
-                                modifier = Modifier.padding(4.dp)
-                            )
-                        }
-                    })
+                    TopAppBar(
+                        title = { Text("Cocktail App") },
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = Color.Transparent,
+                            titleContentColor = colorResource(R.color.white)
+                        ),
+                        actions = {
+                            IconButton(
+                                {
+                                    makeText(context, "Cocktail added to favs", Toast.LENGTH_SHORT).show()
+                                }) {
+                                Icon(
+                                    painter = painterResource(R.drawable.heart_icon),
+                                    contentDescription = "Favorite Icon",
+                                    tint = Color.Unspecified,
+                                    modifier = Modifier.padding(4.dp)
+                                )
+                            }
+                        })
                 }, bottomBar = {
                     NavigationBar() {
                         NavigationBarItem(
