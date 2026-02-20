@@ -52,7 +52,7 @@ fun CategoryItem(textToDisplay: String, context: Context) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(2.dp),
         border = BorderStroke(2.dp, colorResource(R.color.black)),
         onClick = {
             context.startActivity(Intent(context, CategoryViewActivity::class.java))
@@ -60,7 +60,7 @@ fun CategoryItem(textToDisplay: String, context: Context) {
     ) {
         Column(modifier = Modifier.padding(4.dp)) {
             Text(
-                text = textToDisplay, fontSize = 20.sp, fontWeight = FontWeight.Bold
+                text = textToDisplay, fontSize = 18.sp
             )
         }
     }

@@ -54,25 +54,6 @@ fun DetailedCocktail(innerPadding: PaddingValues) {
 }
 
 @Composable
-fun GradientBackground(
-    modifier: Modifier = Modifier, content: @Composable () -> Unit
-) {
-    Box(
-        modifier
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        colorResource(R.color.orange), colorResource(R.color.teal)
-                    )
-                )
-            )
-            .fillMaxSize(),
-    ) {
-        content()
-    }
-}
-
-@Composable
 fun CocktailImage() {
     Image(
         painterResource(R.drawable.cocktail),
