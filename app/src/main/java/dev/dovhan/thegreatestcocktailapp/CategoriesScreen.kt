@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun CategoriesScreen(innerPadding: PaddingValues) {
+
     LazyColumn(modifier = Modifier.padding(innerPadding)) {
         item { CategoryItem(textToDisplay = "Coffee") }
         item { CategoryItem(textToDisplay = "Coffee") }
