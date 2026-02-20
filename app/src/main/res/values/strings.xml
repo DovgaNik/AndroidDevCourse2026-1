@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TheGreatestCocktailApp</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sagittis suscipit turpis, euismod pellentesque orci accumsan at. Nam vehicula suscipit eros, elementum convallis augue posuere a. In hendrerit turpis in maximus suscipit. Nullam viverra lorem ac fringilla consequat. Vivamus imperdiet gravida ligula. Curabitur ut semper magna. Vestibulum suscipit tortor vitae accumsan consequat. Pellentesque eu ultrices ligula, non tincidunt enim. Cras cursus tellus ullamcorper ipsum euismod, eu ornare neque aliquet.</string>
+    <string name="title_activity_category_view">CategoryViewActivity</string>
 </resources>

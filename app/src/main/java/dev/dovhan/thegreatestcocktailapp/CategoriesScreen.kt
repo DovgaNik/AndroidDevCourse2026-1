@@ -1,5 +1,7 @@
 package dev.dovhan.thegreatestcocktailapp
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -26,6 +29,7 @@ import dev.dovhan.thegreatestcocktailapp.api.RetrofitClient
 
 @Composable
 fun CategoriesScreen(innerPadding: PaddingValues) {
+    val context = LocalContext.current
     var categories by remember { mutableStateOf<List<Category>>(emptyList()) }
 
     LaunchedEffect(Unit) {
@@ -38,18 +42,21 @@ fun CategoriesScreen(innerPadding: PaddingValues) {
     ) {
 
         items(categories) { category ->
-            CategoryItem(textToDisplay = category.strCategory)
+            CategoryItem(textToDisplay = category.strCategory, context = context)
         }
     }
 }
 
 @Composable
-fun CategoryItem(textToDisplay: String) {
+fun CategoryItem(textToDisplay: String, context: Context) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        border = BorderStroke(2.dp, colorResource(R.color.black))
+        border = BorderStroke(2.dp, colorResource(R.color.black)),
+        onClick = {
+            context.startActivity(Intent(context, CategoryViewActivity::class.java))
+        }
     ) {
         Column(modifier = Modifier.padding(4.dp)) {
             Text(
