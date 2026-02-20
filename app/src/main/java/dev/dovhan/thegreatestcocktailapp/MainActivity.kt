@@ -24,6 +24,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import dev.dovhan.thegreatestcocktailapp.ui.theme.TheGreatestCocktailAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,6 +36,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val context = LocalContext.current
+            val navController = rememberNavController()
             TheGreatestCocktailAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
                     TopAppBar(
@@ -58,7 +62,11 @@ class MainActivity : ComponentActivity() {
                     NavigationBar() {
                         NavigationBarItem(
                             selected = true,
-                            onClick = {},
+                            onClick = {
+
+                                navController.navigate("cocktail")
+
+                            },
                             label = { Text("Cocktails") },
                             icon = {
                                 Icon(
@@ -70,7 +78,11 @@ class MainActivity : ComponentActivity() {
 
                         NavigationBarItem(
                             selected = true,
-                            onClick = {},
+                            onClick = {
+
+                                navController.navigate("categories")
+
+                            },
                             label = { Text("Categories") },
                             icon = {
                                 Icon(
@@ -81,7 +93,10 @@ class MainActivity : ComponentActivity() {
                             })
                     }
                 }) { innerPadding ->
-                    DetailedCocktail(innerPadding)
+                    NavHost(navController, startDestination = "cocktail") {
+                        composable("cocktail") { DetailedCocktail(innerPadding) }
+                        composable("categories") { CategoriesScreen(innerPadding) }
+                    }
                 }
             }
         }
