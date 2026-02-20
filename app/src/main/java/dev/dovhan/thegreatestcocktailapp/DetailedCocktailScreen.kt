@@ -35,23 +35,21 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun DetailedCocktail(innerPadding: PaddingValues) {
-    GradientBackground() {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            CocktailImage()
-            CocktailName()
-            Row() {
-                InfoTextBox("Other/Unknown")
-                InfoTextBox("Non-alcoholic")
-            }
-            InfoCard("Ingredients")
-            InfoCard("Recipe")
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(innerPadding)
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CocktailImage()
+        CocktailName()
+        Row() {
+            InfoTextBox("Other/Unknown")
+            InfoTextBox("Non-alcoholic")
         }
+        InfoCard("Ingredients")
+        InfoCard("Recipe")
     }
 }
 
@@ -141,9 +139,7 @@ fun InfoCard(textToDisplay: String) {
     ) {
         Column(modifier = Modifier.padding(4.dp)) {
             Text(
-                text = textToDisplay,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
+                text = textToDisplay, fontSize = 20.sp, fontWeight = FontWeight.Bold
             )
             Text(stringResource(R.string.lorem_ipsum))
         }

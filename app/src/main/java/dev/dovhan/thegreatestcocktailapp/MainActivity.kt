@@ -48,7 +48,9 @@ class MainActivity : ComponentActivity() {
                         actions = {
                             IconButton(
                                 {
-                                    makeText(context, "Cocktail added to favs", Toast.LENGTH_SHORT).show()
+                                    makeText(
+                                        context, "Cocktail added to favs", Toast.LENGTH_SHORT
+                                    ).show()
                                 }) {
                                 Icon(
                                     painter = painterResource(R.drawable.heart_icon),
@@ -60,42 +62,36 @@ class MainActivity : ComponentActivity() {
                         })
                 }, bottomBar = {
                     NavigationBar() {
-                        NavigationBarItem(
-                            selected = true,
-                            onClick = {
+                        NavigationBarItem(selected = true, onClick = {
 
-                                navController.navigate("cocktail")
+                            navController.navigate("cocktail")
 
-                            },
-                            label = { Text("Cocktails") },
-                            icon = {
-                                Icon(
-                                    painterResource(R.drawable.cocktail_icon),
-                                    contentDescription = "cocktail icon",
-                                    modifier = Modifier.size(32.dp)
-                                )
-                            })
+                        }, label = { Text("Cocktails") }, icon = {
+                            Icon(
+                                painterResource(R.drawable.cocktail_icon),
+                                contentDescription = "cocktail icon",
+                                modifier = Modifier.size(32.dp)
+                            )
+                        })
 
-                        NavigationBarItem(
-                            selected = true,
-                            onClick = {
+                        NavigationBarItem(selected = true, onClick = {
 
-                                navController.navigate("categories")
+                            navController.navigate("categories")
 
-                            },
-                            label = { Text("Categories") },
-                            icon = {
-                                Icon(
-                                    painterResource(R.drawable.category),
-                                    contentDescription = "cocktail icon",
-                                    modifier = Modifier.size(32.dp)
-                                )
-                            })
+                        }, label = { Text("Categories") }, icon = {
+                            Icon(
+                                painterResource(R.drawable.category),
+                                contentDescription = "cocktail icon",
+                                modifier = Modifier.size(32.dp)
+                            )
+                        })
                     }
                 }) { innerPadding ->
-                    NavHost(navController, startDestination = "cocktail") {
-                        composable("cocktail") { DetailedCocktail(innerPadding) }
-                        composable("categories") { CategoriesScreen(innerPadding) }
+                    GradientBackground() {
+                        NavHost(navController, startDestination = "cocktail") {
+                            composable("cocktail") { DetailedCocktail(innerPadding) }
+                            composable("categories") { CategoriesScreen(innerPadding) }
+                        }
                     }
                 }
             }
