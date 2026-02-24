@@ -1,5 +1,6 @@
 package dev.dovhan.thegreatestcocktailapp
 
+import android.R.attr.content
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +14,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -31,6 +35,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 import dev.dovhan.thegreatestcocktailapp.api.Category
 import dev.dovhan.thegreatestcocktailapp.api.RetrofitClient
 import dev.dovhan.thegreatestcocktailapp.api.SingleCategory
@@ -57,30 +62,35 @@ fun drinksList(innerPadding: PaddingValues, categoryReq: String) {
         categories = RetrofitClient.apiService.getCategory(categoryReq).drinks
     }
 
-    LazyColumn(
-        modifier = Modifier.padding(innerPadding),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
-    ) {
-
-        items(categories) { category ->
-            DrinkCard(textToDisplay = category)
+    LazyVerticalStaggeredGrid(
+        columns = StaggeredGridCells.Fixed(3),
+        content = {
+            items(categories) {
+                category ->
+                AsyncImage(
+                    model = category.strDrinkThumb,
+                    contentDescription = "Picture of the cocktail",
+                )
+            }
         }
-    }
-}
+    )
 
-@Composable
-fun DrinkCard(textToDisplay: SingleCategory) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-        border = BorderStroke(2.dp, colorResource(R.color.red))
-    ) {
-        Column(modifier = Modifier.padding(4.dp)) {
-            Text(
-                text = textToDisplay.strDrink, fontSize = 20.sp, fontWeight = FontWeight.Bold
-            )
-            Text(textToDisplay.strDrinkThumb)
-        }
     }
-}
+
+        @Composable
+        fun DrinkCard(textToDisplay: SingleCategory) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                border = BorderStroke(2.dp, colorResource(R.color.red))
+            ) {
+                Column(modifier = Modifier.padding(4.dp)) {
+                    Text(
+                        text = textToDisplay.strDrink,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+        }
