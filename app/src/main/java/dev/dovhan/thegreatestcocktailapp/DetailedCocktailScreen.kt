@@ -39,7 +39,7 @@ import dev.dovhan.thegreatestcocktailapp.api.RetrofitClient
 import dev.dovhan.thegreatestcocktailapp.api.SingleDrink
 
 @Composable
-fun DetailedCocktail(innerPadding: PaddingValues, cocktailId: String) {
+fun DetailedCocktail(innerPadding: PaddingValues, cocktailId: String?) {
     var drink by remember { mutableStateOf<SingleDrink?>(null) }
     var isLoading by remember(cocktailId) { mutableStateOf(true) }
     var errorMessage by remember(cocktailId) { mutableStateOf<String?>(null) }
@@ -50,7 +50,11 @@ fun DetailedCocktail(innerPadding: PaddingValues, cocktailId: String) {
         drink = null
 
         try {
-            drink = RetrofitClient.apiService.getDrink(cocktailId).drinks.firstOrNull()
+            if (cocktailId != null) {
+                drink = RetrofitClient.apiService.getDrink(cocktailId).drinks.firstOrNull()
+            } else {
+                drink = RetrofitClient.apiService.getRandomDrink().drinks.firstOrNull()
+            }
             if (drink == null) {
                 errorMessage = "No cocktail found for id $cocktailId"
             }
