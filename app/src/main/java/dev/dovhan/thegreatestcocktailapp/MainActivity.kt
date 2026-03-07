@@ -89,7 +89,7 @@ class MainActivity : ComponentActivity() {
                 }) { innerPadding ->
                     GradientBackground() {
                         NavHost(navController, startDestination = "cocktail") {
-                            composable("cocktail") { DetailedCocktail(innerPadding) }
+                            composable("cocktail") { DetailedCocktail(innerPadding, "16419") }
                             composable("categories") { CategoriesScreen(innerPadding) }
                         }
                     }
