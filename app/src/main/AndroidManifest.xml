@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheGreatestCocktailApp">
         <activity
+            android:name=".DetailedCocktailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TheGreatestCocktailApp" />
+        <activity
             android:name=".CategoryViewActivity"
             android:exported="false"
             android:label="@string/title_activity_category_view"
