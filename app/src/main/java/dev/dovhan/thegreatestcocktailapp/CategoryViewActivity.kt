@@ -1,6 +1,8 @@
 package dev.dovhan.thegreatestcocktailapp
 
 import android.R.attr.content
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -47,7 +49,7 @@ class CategoryViewActivity : ComponentActivity() {
         setContent {
             Scaffold() { innerPadding ->
                 GradientBackground() {
-                    drinksList(innerPadding, intent.getStringExtra("category").toString())
+                    DrinksList(innerPadding, intent.getStringExtra("category").toString())
                 }
             }
         }
@@ -55,7 +57,7 @@ class CategoryViewActivity : ComponentActivity() {
 }
 
 @Composable
-fun drinksList(innerPadding: PaddingValues, categoryReq: String) {
+fun DrinksList(innerPadding: PaddingValues, categoryReq: String) {
     var categories by remember { mutableStateOf<List<SingleCategory>>(emptyList()) }
 
     LaunchedEffect(Unit) {
@@ -63,34 +65,29 @@ fun drinksList(innerPadding: PaddingValues, categoryReq: String) {
     }
 
     LazyVerticalStaggeredGrid(
-        columns = StaggeredGridCells.Fixed(3),
+        columns = StaggeredGridCells.Fixed(2),
+        modifier = Modifier.padding(innerPadding),
         content = {
-            items(categories) {
-                category ->
-                AsyncImage(
-                    model = category.strDrinkThumb,
-                    contentDescription = "Picture of the cocktail",
-                )
-            }
-        }
-    )
+            items(categories) { category ->
+                Card(
+                    modifier = Modifier
+                        //.fillMaxWidth()
+                        .padding(16.dp),
+                    border = BorderStroke(2.dp, colorResource(R.color.black)),
+                    onClick = {
 
-    }
-
-        @Composable
-        fun DrinkCard(textToDisplay: SingleCategory) {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                border = BorderStroke(2.dp, colorResource(R.color.red))
-            ) {
-                Column(modifier = Modifier.padding(4.dp)) {
-                    Text(
-                        text = textToDisplay.strDrink,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                    }) {
+                    Column(modifier = Modifier.padding(4.dp)) {
+                        Text(
+                            text = category.strDrink, fontSize = 18.sp
+                        )
+                        AsyncImage(
+                            model = category.strDrinkThumb,
+                            contentDescription = "Picture of the cocktail",
+                        )
+                    }
                 }
             }
-        }
+        })
+
+}
