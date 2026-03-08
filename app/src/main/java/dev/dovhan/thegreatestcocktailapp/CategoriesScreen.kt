@@ -55,7 +55,12 @@ fun CategoryItem(textToDisplay: String, context: Context) {
             .padding(2.dp),
         border = BorderStroke(2.dp, colorResource(R.color.black)),
         onClick = {
-            context.startActivity(Intent(context, CategoryViewActivity::class.java))
+            context.startActivity(
+                Intent(
+                    context,
+                    CategoryViewActivity::class.java
+                ).putExtra("category", textToDisplay)
+            )
         }
     ) {
         Column(modifier = Modifier.padding(4.dp)) {

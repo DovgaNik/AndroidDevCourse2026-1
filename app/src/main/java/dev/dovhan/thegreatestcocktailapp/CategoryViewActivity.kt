@@ -47,7 +47,7 @@ class CategoryViewActivity : ComponentActivity() {
         setContent {
             Scaffold() { innerPadding ->
                 GradientBackground() {
-                    drinksList(innerPadding, "Beer")
+                    drinksList(innerPadding, intent.getStringExtra("category").toString())
                 }
             }
         }
