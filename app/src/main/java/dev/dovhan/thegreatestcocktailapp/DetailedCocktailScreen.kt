@@ -39,7 +39,11 @@ import dev.dovhan.thegreatestcocktailapp.api.RetrofitClient
 import dev.dovhan.thegreatestcocktailapp.api.SingleDrink
 
 @Composable
-fun DetailedCocktail(innerPadding: PaddingValues, cocktailId: String?) {
+fun DetailedCocktail(
+    innerPadding: PaddingValues,
+    cocktailId: String?,
+    onDrinkLoaded: ((SingleDrink?) -> Unit)? = null
+) {
     var drink by remember { mutableStateOf<SingleDrink?>(null) }
     var isLoading by remember(cocktailId) { mutableStateOf(true) }
     var errorMessage by remember(cocktailId) { mutableStateOf<String?>(null) }
@@ -62,6 +66,7 @@ fun DetailedCocktail(innerPadding: PaddingValues, cocktailId: String?) {
             errorMessage = e.message ?: "Failed to load cocktail"
         } finally {
             isLoading = false
+            onDrinkLoaded?.invoke(drink)
         }
     }
 
